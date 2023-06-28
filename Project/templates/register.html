@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register | The Meme Museum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)),url("/static/images/login.png");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+
+        .register-container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            margin-top: 100px;
+        }
+
+        .register-container h2 {
+            color: white;
+            text-align: center;
+        }
+
+        .register-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .register-container label {
+            margin-top: 10px;
+            color: black;
+        }
+
+        .register-container input[type="email"],
+        .register-container input[type="password"] {
+            width: 200px;
+            height: 20px;
+        }
+
+        .register-container button[type="submit"] {
+            width: 100px;
+            margin-top: 20px;
+            border: 3px solid red;
+            border-radius: 24px;
+            padding: 20px 20px;
+            color: white;
+            background-color: blue;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Meme Museum</h1>
+        <nav>
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="register">Register</a></li>
+                <li><a href="login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="register-container">
+            <h2>Create an Account</h2>
+            {% if msg %}
+            <p class="error-message">{{ msg }}</p>
+            {% endif %}
+            <form method="POST" action="/reg">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Meme Museum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-color: #1C1C1C;
+            background-image: url("/static/images/images.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #FFFFFF;
+            font-family: Verdana, Geneva, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #000000;
+            padding: 15px;
+        }
+        
+        h1 {
+            color: #FF4500;
+            font-size: 28px;
+            margin: 0;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        
+        nav ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        main {
+            padding: 15px;
+        }
+        
+        h2 {
+            color: #FF4500;
+            font-size: 22px;
+            margin-top: 0;
+        }
+        
+        p {
+            color: #CCCCCC;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Meme Museum</h1>
+        <nav>
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="register">Register</a></li>
+                <li><a href="login">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>About The Meme Museum</h2>
+        <p>The Meme Museum is a unique digital experience that celebrates the rich tapestry of internet memes.</p>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>

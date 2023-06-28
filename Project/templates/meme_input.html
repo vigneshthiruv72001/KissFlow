@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Example</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: #F5F5F5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input {
+            margin-bottom: 20px;
+            width: 300px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #CCCCCC;
+        }
+
+        button {
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #333333;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 18px;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="excludeTags">Exclude Tags:</label>
+        <input type="text" id="excludeTags" />
+    </div>
+    <div>
+        <label for="keywords">Keywords:</label>
+        <input type="text" id="keywords" />
+    </div>
+    <div>
+        <label for="minRating">Minimum Rating:</label>
+        <input type="number" id="minRating" min="0" max="10" />
+    </div>
+    <div>
+        <label for="includeTags">Include Tags:</label>
+        <input type="text" id="includeTags" />
+    </div>
+    <div>
+        <label for="number">Number of Results:</label>
+        <input type="number" id="number" min="1" max="10" />
+    </div>
+    <div>
+        <label for="maxLength">Maximum Joke Length:</label>
+        <input type="number" id="maxLength" min="10" max="9999" />
+    </div>
+    <button onclick="fetchJokes()">Search Jokes</button>
+    <div id="result"></div>
+
+    <script>
+        const apiKey = '11099e704cmsheb8ad378d6a1fadp128fe4jsn4ac356987dd0';
+
+        async function fetchJokes() {
+            const excludeTags = document.getElementById('excludeTags').value;
+            const keywords = document.getElementById('keywords').value;
+            const minRating = document.getElementById('minRating').value;
+            const includeTags = document.getElementById('includeTags').value;
+            const number = document.getElementById('number').value;
+            const maxLength = document.getElementById('maxLength').value;
+
+            const url = `https://humor-jokes-and-memes.p.rapidapi.com/jokes/search?exclude-tags=${excludeTags}&keywords=${keywords}&min-rating=${minRating}&include-tags=${includeTags}&number=${number}&max-length=${maxLength}`;
+
+            const options = {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': apiKey,
+                    'X-RapidAPI-Host': 'humor-jokes-and-memes.p.rapidapi.com'
+                }
+            };
+
+            try {
+                const response = await fetch(url, options);
+                const data = await response.json();
+
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '';
+
+                if (data.jokes && data.jokes.length > 0) {
+                    data.jokes.forEach(jokeObj => {
+                        const joke = jokeObj.joke;
+                        const jokeElement = document.createElement('p');
+                        jokeElement.textContent = joke;
+                        resultDiv.appendChild(jokeElement);
+                    });
+                } else {
+                    const noJokesMessage = document.createElement('p');
+                    noJokesMessage.textContent = 'No jokes found.';
+                    resultDiv.appendChild(noJokesMessage);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
